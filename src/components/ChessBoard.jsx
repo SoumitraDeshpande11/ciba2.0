@@ -10,18 +10,23 @@ export default function ChessBoard({ inView }) {
   const hoverRef = useRef(false);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && groupRef.current) {
+      // Initial position
+      groupRef.current.position.y = -5;
+      groupRef.current.rotation.y = Math.PI * 2;
+
       // Animate in when in view
-      gsap.fromTo(
-        groupRef.current.position,
-        { y: -5 },
-        { y: 0, duration: 1.5, ease: 'power2.out' }
-      );
-      gsap.fromTo(
-        groupRef.current.rotation,
-        { y: Math.PI * 2 },
-        { y: 0, duration: 2, ease: 'power2.out' }
-      );
+      gsap.to(groupRef.current.position, {
+        y: 0,
+        duration: 1.5,
+        ease: 'power2.out'
+      });
+
+      gsap.to(groupRef.current.rotation, {
+        y: 0,
+        duration: 2,
+        ease: 'power2.out'
+      });
     }
   }, [inView]);
 

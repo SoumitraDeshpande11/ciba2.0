@@ -47,7 +47,7 @@ function App() {
   };
 
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white min-h-screen">
       {/* Initial fade-in overlay */}
       <AnimatePresence>
         {!isLoaded && (

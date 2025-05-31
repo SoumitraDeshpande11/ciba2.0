@@ -9,18 +9,25 @@ export default function RoboticArms({ isLoaded }) {
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && groupRef.current) {
+      // Initial position
+      groupRef.current.position.x = -5;
+      groupRef.current.rotation.y = -Math.PI / 4;
+
       // Initial animation sequence
-      gsap.fromTo(
-        groupRef.current.position,
-        { x: -5 },
-        { x: 0, duration: 2, ease: 'power2.out', delay: 0.5 }
-      );
-      gsap.fromTo(
-        groupRef.current.rotation,
-        { y: -Math.PI / 4 },
-        { y: 0, duration: 2, ease: 'power2.out', delay: 0.5 }
-      );
+      gsap.to(groupRef.current.position, {
+        x: 0,
+        duration: 2,
+        ease: 'power2.out',
+        delay: 0.5
+      });
+
+      gsap.to(groupRef.current.rotation, {
+        y: 0,
+        duration: 2,
+        ease: 'power2.out',
+        delay: 0.5
+      });
     }
   }, [isLoaded]);
 
